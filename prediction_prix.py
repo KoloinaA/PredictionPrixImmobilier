@@ -15,6 +15,14 @@ x_test = test_data[features]
 x_train = x_train.fillna(0)
 x_test = x_test.fillna(0)
 
+# print(x_train.dtypes)
+#mampitovy ny variable ho type entier daholo
+x_train = pd.get_dummies(x_train)
+x_test = pd.get_dummies(x_test)
+
+# Aligner les colonnes entre train et test
+x_train, x_test = x_train.align(x_test, join='left', axis=1, fill_value=0)
+
 model = LinearRegression()
 model.fit(x_train, y_train)
 
