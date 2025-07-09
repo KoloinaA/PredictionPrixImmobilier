@@ -27,15 +27,6 @@ model = LinearRegression()
 model.fit(x_train, y_train)
 
 # # Prédiction
-# y_pred = model.predict(x_test)
-
-# # Sauvegarde dans submission.csv
-# submission = pd.DataFrame({
-#     "Id": test_data["Id"],
-#     "SalePrice": y_pred
-# })
-# submission.to_csv("submission.csv", index=False)
-
 y_pred = model.predict(x_test)
 
 submission = pd.DataFrame({
