@@ -31,6 +31,7 @@ test_data = pd.read_csv("test.csv")
 target = "SalePrice"
 
 # 2. On sépare les features et la target
+#on enleve SalePrice pour ne garder que les variables explicatives
 X = train_data.drop(columns=[target])
 y = train_data[target]
 
@@ -39,6 +40,8 @@ num_cols = X.select_dtypes(include=['int64', 'float64']).columns
 cat_cols = X.select_dtypes(include=['object']).columns
 
 # 4. Prétraitement : Imputer et encoder
+#SimpleImputer remplace la valeur manquante (ici par la mediane)
+#OnHotEncoder transforme les valeurs en binaire
 preprocessor = ColumnTransformer([
     ('num', SimpleImputer(strategy='median'), num_cols),
     ('cat', Pipeline([
@@ -49,6 +52,7 @@ preprocessor = ColumnTransformer([
 
 # 5. Pipeline de transformation uniquement pour les données
 X_processed = preprocessor.fit_transform(X)
+#application de la meme transformation pour les données de test
 X_test_processed = preprocessor.transform(test_data)
 
 # 6. Sélection automatique des meilleures features (ex : les 50 meilleures)
