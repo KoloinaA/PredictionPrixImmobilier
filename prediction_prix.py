@@ -5,6 +5,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
+import joblib
 
 train_data= pd.read_csv("train.csv")
 test_data = pd.read_csv("test.csv")
@@ -74,3 +75,7 @@ submission = pd.DataFrame({
 
 submission.to_csv("submission.csv", index= False)
 
+#sauvegarde du modele, preprocessor, selector
+joblib.dump(model, "model_prix_immobilier")
+joblib.dump(preprocessor,"preprocessor.pkl")
+joblib.dump(selector,"selector.pkl")
